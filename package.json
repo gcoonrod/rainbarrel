@@ -1,0 +1,51 @@
+{
+  "author": "Greg Coonrod <greg.coonrod@gmail.com>",
+  "name": "rainbarrel",
+  "description": "Data collection server for IoT sensors.",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gcoonrod/rainbarrel.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gcoonrod/rainbarrel/issues"
+  },
+  "homepage": "https://github.com/gcoonrod/rainbarrel#readme",
+  "dependencies": {
+    "actionhero": "18.0.1",
+    "ws": "latest",
+    "fakeredis": "latest",
+    "ioredis": "latest"
+  },
+  "devDependencies": {
+    "cross-env": "latest",
+    "chai": "latest",
+    "dirty-chai": "latest",
+    "mocha": "latest",
+    "standard": "latest"
+  },
+  "scripts": {
+    "start": "actionhero start",
+    "actionhero": "actionhero",
+    "pretest": "standard",
+    "test": "cross-env NODE_ENV=test mocha"
+  },
+  "standard": {
+    "ignore": [
+      "public/javascript/ActionheroWebsocketClient.*"
+    ],
+    "globals": [
+      "describe",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach",
+      "it",
+      "expect"
+    ]
+  }
+}
