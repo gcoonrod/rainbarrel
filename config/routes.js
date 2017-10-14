@@ -27,6 +27,9 @@ exports['default'] = {
 
       ---------------------- */
 
+      post: [
+        { path: '/metric', action: 'storeMetric'}
+      ]
     }
   }
 }

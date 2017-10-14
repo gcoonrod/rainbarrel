@@ -1,6 +1,9 @@
 'use strict'
 
 const path = require('path')
+const uuidv5 = require('uuid/v5')
+
+const RAINBARREL = 'rainbarrel'
 
 exports['default'] = {
   general: (api) => {
@@ -13,11 +16,11 @@ exports['default'] = {
       //  Be sure that every server you run has a unique ID (which will happen when generated dynamically)
       //  id: 'myActionHeroServer',
       // A unique token to your application that servers will use to authenticate to each other
-      serverToken: 'change-me',
+      serverToken: uuidv5(packageJSON.name + '-' + packageJSON.version, '555aa1d4-5040-4751-bec2-6310db9fb8ce'),
       // the redis prefix for actionhero's cache objects
-      cachePrefix: 'actionhero:cache:',
+      cachePrefix: RAINBARREL + ':cache:',
       // the redis prefix for actionhero's cache/lock objects
-      lockPrefix: 'actionhero:lock:',
+      lockPrefix: RAINBARREL + ':lock:',
       // how long will a lock last before it exipres (ms)?
       lockDuration: 1000 * 10, // 10 seconds
       // Watch for changes in actions and tasks, and reload/restart them on the fly
@@ -39,7 +42,7 @@ exports['default'] = {
       // The default priority level given to middleware of all types (action, connection, say, and task)
       defaultMiddlewarePriority: 100,
       // Which channel to use on redis pub/sub for RPC communication
-      channel: 'actionhero',
+      channel: RAINBARREL,
       // How long to wait for an RPC call before considering it a failure
       rpcTimeout: 5000,
       // should CLI methods and help include internal ActionHero CLI methods?
