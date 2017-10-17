@@ -1,18 +1,15 @@
-'use strict';
-const api = require('actionhero').api
+'use strict'
 
 module.exports = class Metric {
-  constructor({name, measurement}){
-    this.description = 'Basic Metric'
+  constructor({id, name, unit, description}){
+    this.id = id
+    this.description = description
     this.name = name
-    this.measurement = measurement
+    this.unit = unit
   }
 
   static decodeMetricString(metricString){
-    api.log("notice", "METRIC DECODE")
-    api.log("notice", metricString)
     let parts = metricString.split('|')
-    api.log("notice", parts)
     let metric = new Metric({name: parts[0], measurement: parts[1]})
     metric.value = parts[2]
     metric.id = parts[3]

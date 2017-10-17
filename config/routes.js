@@ -28,7 +28,7 @@ exports['default'] = {
       ---------------------- */
 
       post: [
-        { path: '/metric', action: 'storeMetric'}
+        { path: '/measurement', action: 'storeMeasurement'}
       ]
     }
   }
