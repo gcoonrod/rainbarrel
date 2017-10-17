@@ -26,12 +26,15 @@ module.exports = class RegisterDeviceAction extends ActionHero.Action {
 
   async run ({params, response}) {
     const api = ActionHero.api
+    const DeviceModel = api.database.models['device']
+
     api.log(`Registering device: ${params.deviceId}`, 'info')
-    response.device = new Device({
+    let device = await DeviceModel.create({
       name: params.name,
       id: params.deviceId,
       ipAddress: params.ipAddress
     })
+    response.device = device
   }
 }
 

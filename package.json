@@ -19,6 +19,8 @@
     "actionhero": "18.0.1",
     "fakeredis": "latest",
     "ioredis": "latest",
+    "sequelize": "^4.15.0",
+    "sqlite3": "^3.1.13",
     "uuid": "3.1.0",
     "ws": "latest"
   },
