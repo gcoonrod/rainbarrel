@@ -1,5 +1,5 @@
 'use strict'
-
+const Sequelize = require('sequelize')
 
 module.exports = class Measurement {
   constructor({deviceId, metricId, timestamp, value}){
@@ -24,6 +24,20 @@ module.exports = class Measurement {
       value: parseFloat(parts[3])
     }
     return new Measurement(options)
+  }
+
+  static modelDefinition(){
+    return {
+      name: 'measurement',
+      columns: {
+        value: Sequelize.FLOAT,
+        timestamp: Sequelize.STRING
+      },
+      options: {
+        timestamps: true,
+        updatedAt: false
+      }
+    }
   }
 }
 

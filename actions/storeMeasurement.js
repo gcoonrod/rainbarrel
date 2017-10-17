@@ -19,8 +19,16 @@ module.exports = class StoreMeasurementAction extends ActionHero.Action {
 
   async run ({params, response}) {
     const api = ActionHero.api
+    const MeasurementModel = api.database.models['measurement']
     api.log(`Received raw measurement string [${params.measurement}]`, 'info')
 
-    response.measurement = Measurement.decodeRawString(params.measurement)
+    const measurement = Measurement.decodeRawString(params.measurement)
+
+    response.measurement = await MeasurementModel.create({
+      deviceId: measurement.deviceId,
+      metricId: measurement.metricId,
+      value: measurement.value,
+      timestam: measurement.timestamp
+    })
   }
 }

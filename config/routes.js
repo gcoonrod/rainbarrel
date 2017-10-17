@@ -27,6 +27,10 @@ exports['default'] = {
 
       ---------------------- */
 
+      get: [
+        { path: '/devices', action: 'listDevices'}
+      ],
+
       post: [
         { path: '/measurements', action: 'storeMeasurement'},
         { path: '/devices', action: 'registerDevice'},

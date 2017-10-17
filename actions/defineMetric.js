@@ -26,12 +26,13 @@ module.exports = class DefineMetricAction extends ActionHero.Action {
 
   async run ({params, response}) {
     const api = ActionHero.api;
+    const MetricModel = api.database.models['metric']
     api.log(`Defining a new metric ${params.id}, named ${params.name}.`, 'info')
 
-    response.metric = new Metric({
+    response.metric = await MetricModel.create({
       id: params.id,
-      description: params.description,
       name: params.name,
+      description: params.description,
       unit: params.unit
     })
   }

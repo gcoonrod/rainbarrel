@@ -3,9 +3,11 @@ const ActionHero = require('actionhero')
 const Sequelize = require('sequelize')
 
 const Device = require('../classes/device')
+const Metric = require('../classes/metric')
+const Measurement = require('../classes/measurement')
 
 const modelClasses = [
-  Device
+  Device, Metric, Measurement
 ]
 
 module.exports = class DatabaseInitializer extends ActionHero.Initializer {
@@ -29,7 +31,10 @@ module.exports = class DatabaseInitializer extends ActionHero.Initializer {
           min: 0,
           idle: 1000
         },
-        storage: `${__dirname}/../database.sqlite`
+        storage: `${__dirname}/../database.sqlite`,
+        logging: (sql, time) => {
+          api.log(`[DATABASE] ${sql}`, api.config.database.logging.level)
+        }
       }),
       models: {}
     }
@@ -40,13 +45,30 @@ module.exports = class DatabaseInitializer extends ActionHero.Initializer {
     const api = ActionHero.api
     await database.connection.authenticate()
     api.log('Connected to database', 'info')
-    modelClasses.forEach(async modelClass => {
+
+    // let modelsDefined = modelClasses.map(async modelClass => {
+    //   const {name, columns} = modelClass.modelDefinition()
+    //   const model = await database.connection.define(name, columns)
+    //   await model.sync()
+    //   database.models[name] = model
+    //   api.log(`Defined model [${name}]`)
+    // })
+
+    // await Promise.all(modelsDefined)
+
+    for (const modelClass of modelClasses){
       const {name, columns} = modelClass.modelDefinition()
       const model = await database.connection.define(name, columns)
       await model.sync()
       database.models[name] = model
       api.log(`Defined model [${name}]`)
-    })
+    }
+
+    await database.models['measurement'].belongsTo(database.models['device'], {foreignKey: 'deviceId'})
+    await database.models['measurement'].belongsTo(database.models['metric'], {foreignKey: 'metricId'})
+
+    await database.models['measurement'].sync({force: true})
+
   }
   async stop () {}
 }
