@@ -28,7 +28,9 @@ exports['default'] = {
       ---------------------- */
 
       get: [
-        { path: '/devices', action: 'listDevices'}
+        { path: '/devices', action: 'listDevices'},
+        { path: '/metrics', action: 'listMetrics'},
+        { path: '/measurements', action: 'listMeasurements'}
       ],
 
       post: [
