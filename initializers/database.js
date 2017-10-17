@@ -46,16 +46,6 @@ module.exports = class DatabaseInitializer extends ActionHero.Initializer {
     await database.connection.authenticate()
     api.log('Connected to database', 'info')
 
-    // let modelsDefined = modelClasses.map(async modelClass => {
-    //   const {name, columns} = modelClass.modelDefinition()
-    //   const model = await database.connection.define(name, columns)
-    //   await model.sync()
-    //   database.models[name] = model
-    //   api.log(`Defined model [${name}]`)
-    // })
-
-    // await Promise.all(modelsDefined)
-
     for (const modelClass of modelClasses){
       const {name, columns} = modelClass.modelDefinition()
       const model = await database.connection.define(name, columns)
