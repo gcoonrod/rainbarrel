@@ -10,6 +10,6 @@ module.exports = class ListDevicesAction extends ActionHero.Action {
   }
 
   async run (data) {
-    data.response.devices = await ActionHero.api.database.models['device'].findAll()
+    data.response.devices = await ActionHero.api.models.device.findAll()
   }
 }

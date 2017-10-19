@@ -25,20 +25,6 @@ module.exports = class Measurement {
     }
     return new Measurement(options)
   }
-
-  static modelDefinition(){
-    return {
-      name: 'measurement',
-      columns: {
-        value: Sequelize.FLOAT,
-        timestamp: Sequelize.STRING
-      },
-      options: {
-        timestamps: true,
-        updatedAt: false
-      }
-    }
-  }
 }
 
 function validateParts(parts) {

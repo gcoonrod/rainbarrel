@@ -10,6 +10,6 @@ module.exports = class ListMeasurementsAction extends ActionHero.Action {
   }
 
   async run (data) {
-    data.response.measurements = await ActionHero.api.database.models['measurement'].findAll()
+    data.response.measurements = await ActionHero.api.models.measurement.findAll()
   }
 }

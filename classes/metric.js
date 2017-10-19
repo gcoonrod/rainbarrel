@@ -8,19 +8,4 @@ module.exports = class Metric {
     this.name = name
     this.unit = unit
   }
-
-  static modelDefinition(){
-    return {
-      name: 'metric',
-      columns: {
-        name: Sequelize.STRING,
-        id: {
-          type: Sequelize.STRING,
-          primaryKey: true
-        },
-        unit: Sequelize.STRING,
-        description: Sequelize.TEXT
-      }
-    }
-  }
 }

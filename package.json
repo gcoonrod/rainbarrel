@@ -17,22 +17,26 @@
   "homepage": "https://github.com/gcoonrod/rainbarrel#readme",
   "dependencies": {
     "actionhero": "18.0.1",
+    "ah-sequelize-plugin": "^1.0.0",
     "fakeredis": "latest",
     "ioredis": "latest",
     "sequelize": "^4.15.0",
+    "sequelize-fixtures": "^0.6.0",
     "sqlite3": "^3.1.13",
     "uuid": "3.1.0",
     "ws": "latest"
   },
   "devDependencies": {
-    "cross-env": "latest",
     "chai": "latest",
+    "cross-env": "latest",
     "dirty-chai": "latest",
     "mocha": "latest",
+    "sequelize-cli": "^3.0.0",
     "standard": "latest"
   },
   "scripts": {
     "start": "actionhero start",
+    "debug": "node --inspect-brk actionhero start",
     "actionhero": "actionhero",
     "pretest": "standard",
     "test": "cross-env NODE_ENV=test mocha"
