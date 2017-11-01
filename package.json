@@ -18,6 +18,8 @@
   "dependencies": {
     "actionhero": "18.0.1",
     "ah-sequelize-plugin": "^1.0.0",
+    "client-oauth2": "^4.1.0",
+    "dotenv": "^4.0.0",
     "fakeredis": "latest",
     "ioredis": "latest",
     "sequelize": "^4.15.0",
