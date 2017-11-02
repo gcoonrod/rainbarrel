@@ -20,6 +20,7 @@ module.exports = class Oauth2CallbackAction extends ActionHero.Action {
   async run (data) {
     const api = ActionHero.api;
     const client = api.oauth2.clients[data.params.clientId]
+    const TokenModel = api.models.token
 
     if (client === undefined) {
       data.connection.rawConnection.responseHttpCode = 404
@@ -32,6 +33,14 @@ module.exports = class Oauth2CallbackAction extends ActionHero.Action {
       const authorization = await client.code.getToken(data.connection.rawConnection.req.uri)
       
       api.log('Authorization: ', 'debug', authorization.data)
+
+      let tokenResult = await TokenModel.upsert({
+        service: data.params.clientId,
+        accessToken: authorization.data.access_token,
+        refreshToken: authorization.data.refresh_token
+      })
+
+      api.log('Oauth token writen to database.', 'debug', tokenResult)
       
       data.connection.sendFile('oauth/success.html')
       data.toRender = false
