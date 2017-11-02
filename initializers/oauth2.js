@@ -7,8 +7,7 @@ module.exports = class Oauth2Initializer extends ActionHero.Initializer {
   constructor () {
     super()
     this.name = 'oauth2'
-    this.loadPriority = 1000,
-    this.startPriority = 1000
+    this.loadPriority = 1000
   }
 
   async initialize () {
@@ -25,30 +24,11 @@ module.exports = class Oauth2Initializer extends ActionHero.Initializer {
         clientSecret: settings.clientSecret,
         accessTokenUri: settings.tokenUrl,
         authorizationUri: settings.authUrl,
-        redirectUri: ActionHero.api.config.oauth2.redirectUrl,
+        redirectUri: settings.redirectUrl,
         scopes: settings.scopes
       })
     }
 
     ActionHero.api.log(`Oauth2 Client initialization complete. Loaded ${clients.size} clients.`, 'info')
-  }
-
-  async start() {
-    const api = ActionHero.api
-    const fitbitAuth = api.oauth2.clients.fitbit
-
-    const uri = fitbitAuth.code.getUri()
-    api.log('uri: ', 'info', uri)
-    const flow = await Oauth2Initializer.doOauthFlow(uri)
-    api.log('flow', 'info', flow)
-  }
-
-  static doOauthFlow(uri){
-    return new Promise((resolve, reject) => {
-      https.get(uri, (response) => {
-        response.on('data', data => resolve(data))
-      })
-      .on('error', error => reject(error))
-    })
   }
 }

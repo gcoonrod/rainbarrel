@@ -10,20 +10,36 @@ module.exports = class Oauth2CallbackAction extends ActionHero.Action {
     this.inputs = {
       code: {
         required: true
+      },
+      clientId: {
+        required: true
       }
     }
   }
 
-  async run ({params, response, connection}) {
+  async run (data) {
     const api = ActionHero.api;
-    api.log('Got callback', 'info', params)
+    const client = api.oauth2.clients[data.params.clientId]
 
-    const fitbitAuth = api.oauth2.clients.fitbit
-    const authorization = await fitbitAuth.code.getToken(connection.rawConnection.req.uri)
+    if (client === undefined) {
+      data.connection.rawConnection.responseHttpCode = 404
+      data.connection.sendFile('oauth/404.html')
+      data.toRender = false
+      return
+    }
 
-    response = {
-      accessToken: authorization.accessToken,
-      refreshToken: authorization.refreshToken
+    try {
+      const authorization = await client.code.getToken(data.connection.rawConnection.req.uri)
+      
+      api.log('Authorization: ', 'debug', authorization.data)
+      
+      data.connection.sendFile('oauth/success.html')
+      data.toRender = false
+    } catch (error) {
+      api.log('Error getting Oauth token!', 'error', error)
+      data.connection.rawConnection.responseHttpCode = 400
+      data.connection.sendFile('oauth/failure.html')
+      data.toRender = false
     }
   }
 }

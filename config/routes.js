@@ -31,7 +31,7 @@ exports['default'] = {
         { path: '/devices', action: 'listDevices'},
         { path: '/metrics', action: 'listMetrics'},
         { path: '/measurements', action: 'listMeasurements'},
-        { path: '/oauth2/callback', action: 'oauthCallback'}
+        { path: '/oauth2/:clientId/callback', action: 'oauthCallback'}
       ],
 
       post: [
