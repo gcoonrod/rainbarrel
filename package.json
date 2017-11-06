@@ -22,9 +22,11 @@
     "dotenv": "^4.0.0",
     "fakeredis": "latest",
     "ioredis": "latest",
+    "moment": "^2.19.1",
     "sequelize": "^4.15.0",
     "sequelize-fixtures": "^0.6.0",
     "sqlite3": "^3.1.13",
+    "superagent": "^3.8.0",
     "uuid": "3.1.0",
     "ws": "latest"
   },
