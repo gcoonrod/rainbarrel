@@ -2,10 +2,10 @@
 const ActionHero = require('actionhero')
 const moment = require('moment')
 
-module.exports = class CollectWeightDailyTask extends ActionHero.Task {
+module.exports = class CollectWeightDetailsDailyTask extends ActionHero.Task {
   constructor () {
     super()
-    this.name = 'collectWeightDaily'
+    this.name = 'collectWeightDetailsDaily'
     this.description = 'Collects weight measurements from Fitbit API daily and stores measurements.'
     this.frequency = 86400000
     this.queue = 'default'
@@ -29,10 +29,26 @@ module.exports = class CollectWeightDailyTask extends ActionHero.Task {
     const weightMeasurement = request.weight[0]
     const time = moment(`${weightMeasurement.date} ${weightMeasurement.time}`, 'YYYY-MM-DD HH:mm:ss').valueOf()
 
+    const {weight, bmi, fat} = weightMeasurement
+
     await MeasurementModel.create({
       deviceId: "7",
       metricId: "3",
-      value: weightMeasurement.weight,
+      value: weight,
+      timestamp: `${time}`
+    })
+
+    await MeasurementModel.create({
+      deviceId: "7",
+      metricId: "4",
+      value: bmi,
+      timestamp: `${time}`
+    })
+
+    await MeasurementModel.create({
+      deviceId: "7",
+      metricId: "5",
+      value: fat,
       timestamp: `${time}`
     })
 

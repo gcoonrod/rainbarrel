@@ -32,6 +32,14 @@
     }
   },
   {
+    "model": "device",
+    "data": {
+      "id": 7,
+      "name": "Fitbit API",
+      "ipAddress": "127.0.0.1"
+    }
+  },
+  {
     "model": "metric",
     "data": {
       "id": 0,
@@ -47,6 +55,33 @@
       "name": "Pressure",
       "unit": "psi",
       "description": "Ambient air pressure"
+    }
+  },
+  {
+    "model": "metric",
+    "data": {
+      "id": 3,
+      "name": "Weight",
+      "unit": "lbs",
+      "description": "Weight"
+    }
+  },
+  {
+    "model": "metric",
+    "data": {
+      "id": 4,
+      "name": "BMI",
+      "unit": "kg/m^2",
+      "description": "Body Mass Index"
+    }
+  },
+  {
+    "model": "metric",
+    "data": {
+      "id": 5,
+      "name": "Body Fat",
+      "unit": "%",
+      "description": "Body Fat Percentage"
     }
   },
   {

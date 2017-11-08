@@ -7,8 +7,6 @@ module.exports = class FitbitAPIInitializer extends ActionHero.Initializer {
     super()
     this.name = 'fitbit'
     this.loadPriority = 1000
-    this.startPriority = 1000
-    this.stopPriority = 1000
   }
 
   async initialize () {
@@ -40,6 +38,8 @@ module.exports = class FitbitAPIInitializer extends ActionHero.Initializer {
             const url = api.fitbit.baseUrl + api.fitbit.resources.body.url + api.fitbit.resources.body.weight.url + `/date/${dateString}.json`
             const response = await superagent.get(url)
               .set('Authorization', `Bearer ${token.accessToken}`)
+              .set('Accept-Locale', 'en_US')
+              .set('Accept-Language', 'en_US')
               .type('application/json')
               .accept('application/json')
 
@@ -49,7 +49,4 @@ module.exports = class FitbitAPIInitializer extends ActionHero.Initializer {
       }
     }
   }
-
-  async start () {}
-  async stop () {}
 }
