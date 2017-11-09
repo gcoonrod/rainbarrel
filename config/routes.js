@@ -36,9 +36,7 @@ exports['default'] = {
       ],
 
       post: [
-        { path: '/measurements', action: 'storeMeasurement'},
-        { path: '/devices', action: 'registerDevice'},
-        { path: '/metrics', action: 'defineMetric'}
+        { path: '/measurements', action: 'storeMeasurement'}
       ]
     }
   }

@@ -4,14 +4,14 @@ module.exports = (sequelize, DataTypes) => {
     value: DataTypes.FLOAT,
     timestamp: DataTypes.STRING,
     deviceId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.STRING,
       references: {
         model: 'device',
         key: 'id'
       }
     },
     metricId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.STRING,
       references: {
         model: 'metric',
         key: 'id'

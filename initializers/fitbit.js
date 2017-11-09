@@ -6,7 +6,8 @@ module.exports = class FitbitAPIInitializer extends ActionHero.Initializer {
   constructor () {
     super()
     this.name = 'fitbit'
-    this.loadPriority = 1000
+    this.loadPriority = 1000,
+    this.startPriority = 1000
   }
 
   async initialize () {

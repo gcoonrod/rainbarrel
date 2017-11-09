@@ -9,14 +9,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       deviceId: {
-        type: Sequelize.INTEGER.UNSIGNED,
+        type: Sequelize.STRING,
         references: {
           model: 'devices',
           key: 'id'
         }
       },
       metricId: {
-        type: Sequelize.INTEGER.UNSIGNED,
+        type: Sequelize.STRING,
         references: {
           model: 'metrics',
           key: 'id'

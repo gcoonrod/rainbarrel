@@ -5,7 +5,7 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.INTEGER.UNSIGNED
+        type: Sequelize.STRING
       },
       name: {
         type: Sequelize.STRING

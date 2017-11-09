@@ -31,23 +31,25 @@ module.exports = class CollectWeightDetailsDailyTask extends ActionHero.Task {
 
     const {weight, bmi, fat} = weightMeasurement
 
+    const fitbitDeviceId = api.config.rainbarrel.devices.fitbit.id
+
     await MeasurementModel.create({
-      deviceId: "7",
-      metricId: "3",
+      deviceId: fitbitDeviceId,
+      metricId: api.config.rainbarrel.metrics.weight.id,
       value: weight,
       timestamp: `${time}`
     })
 
     await MeasurementModel.create({
-      deviceId: "7",
-      metricId: "4",
+      deviceId: fitbitDeviceId,
+      metricId: api.config.rainbarrel.metrics.bmi.id,
       value: bmi,
       timestamp: `${time}`
     })
 
     await MeasurementModel.create({
-      deviceId: "7",
-      metricId: "5",
+      deviceId: fitbitDeviceId,
+      metricId: api.config.rainbarrel.metrics.fat.id,
       value: fat,
       timestamp: `${time}`
     })
